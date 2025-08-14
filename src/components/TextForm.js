@@ -28,12 +28,25 @@ export default function TextForm(props) {
        setText(event.target.value);
     }
 
+    const handleCopyClick = (event) =>{
+        event.preventDefault();
+
+        navigator.clipboard.writeText(text);
+    }
+
+    const handleRemoveExtraSpaceClick = (event) =>{
+        event.preventDefault();
+
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "));
+    }
+
     return (
         <>
-        <form className="card p-3">
+        <form className="card p-3" style={{backgroundColor: props.mode === 'dark' ? '#212529e3':'white',color: props.mode === 'dark' ? 'white':'black'}}>
             <h4 className="mb-4">{props.heading}</h4>
             <div className="mb-3">
-                <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange}></textarea>
+                <textarea className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode === 'dark' ? '#212529e3':'white',color: props.mode === 'dark' ? 'white':'black'}}></textarea>
             </div>
             <div>
                 <button type="submit" onClick={handleUpClick} className="btn btn-primary mx-1">
@@ -45,6 +58,12 @@ export default function TextForm(props) {
                  <button type="submit" onClick={handleClearClick} className="btn btn-primary mx-1">
                     Clear Text
                 </button>
+                 <button type="submit" onClick={handleCopyClick} className="btn btn-primary mx-1">
+                    Copy Text
+                </button>
+                 <button type="submit" onClick={handleRemoveExtraSpaceClick} className="btn btn-primary mx-1">
+                    Remove Extra Spaces
+                </button>
             </div>
         </form>
         <div className="container my-4">
@@ -52,7 +71,7 @@ export default function TextForm(props) {
             <p>{text.split(" ").length} words, {text.length} characters</p>
             <p>{0.008 * text.split(" ").length} Minutes Read</p>
             <h5>Preview</h5>
-            <p>{text}</p>
+            <p>{text.length > 0 ? text : 'Enter something in the Textbox above to preview'}</p>
         </div>
         </>
         
