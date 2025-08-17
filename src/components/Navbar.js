@@ -19,10 +19,18 @@ export default function Navbar({ title, aboutText, mode,toggleMode }) {
               <Link className="nav-link" to="/about">{aboutText}</Link>
             </li>
           </ul>
-          <div className={`form-check form-switch text-${mode === 'light' ? 'dark' : 'light'}`}>
-            <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" onClick={toggleMode}/>
-              <label className="form-check-label" htmlFor="switchCheckDefault">Dark Mode</label>
+          <div className="d-flex">
+            <div className="bg-primary rounded mx-2" onClick={()=>{toggleMode('primary')}} style={{ height:'30px',width:'30px',cursor:'pointer'}}></div>
+            <div className="bg-danger rounded mx-2" onClick={()=>{toggleMode('danger')}} style={{ height:'30px',width:'30px',cursor:'pointer'}}></div>
+            <div className="bg-success rounded mx-2" onClick={()=>{toggleMode('success')}} style={{ height:'30px',width:'30px',cursor:'pointer'}}></div>
+            <div className="bg-warning rounded mx-2" onClick={()=>{toggleMode('warning')}} style={{ height:'30px',width:'30px',cursor:'pointer'}}></div>
+             <div className="bg-light rounded mx-2" onClick={()=>{toggleMode('light')}} style={{ height:'30px',width:'30px',cursor:'pointer'}}></div>
+              <div className="bg-dark rounded mx-2" onClick={()=>{toggleMode('dark')}} style={{ height:'30px',width:'30px',cursor:'pointer'}}></div>
           </div>
+          {/* <div className={`form-check form-switch text-${mode === 'light' ? 'dark' : 'light'}`}>
+            <input className="form-check-input" type="checkbox" role="switch" id="switchCheckDefault" onClick={()=>{toggleMode(null)}}/>
+              <label className="form-check-label" htmlFor="switchCheckDefault">Toggle Mode</label>
+          </div> */}
 
         </div>
       </div>

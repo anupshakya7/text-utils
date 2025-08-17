@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function TextForm(props) {
+
   const [text, setText] = useState("Enter text here");
 
   const handleOnChange = (event) => {
@@ -35,6 +36,7 @@ export default function TextForm(props) {
     event.preventDefault();
 
     navigator.clipboard.writeText(text);
+    document.getSelection().removeAllRanges();
     props.showAlert("Copied Text!", "success");
   };
 
@@ -73,35 +75,40 @@ export default function TextForm(props) {
           <button
             type="submit"
             onClick={handleUpClick}
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
+            disabled={text.length === 0}
           >
             Convert to Uppercase
           </button>
           <button
             type="submit"
             onClick={handleLoClick}
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
+            disabled={text.length === 0}
           >
             Convert to Lowercase
           </button>
           <button
             type="submit"
             onClick={handleClearClick}
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
+            disabled={text.length === 0}
           >
             Clear Text
           </button>
           <button
             type="submit"
             onClick={handleCopyClick}
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
+            disabled={text.length === 0}
           >
             Copy Text
           </button>
           <button
             type="submit"
             onClick={handleRemoveExtraSpaceClick}
-            className="btn btn-primary mx-1"
+            className="btn btn-primary mx-1 my-1"
+            disabled={text.length === 0}
           >
             Remove Extra Spaces
           </button>
@@ -110,14 +117,14 @@ export default function TextForm(props) {
       <div className="container my-4">
         <h4>Your Text Summary</h4>
         <p>
-          {text.split(" ").length} words, {text.length} characters
+          {text.split(" ").filter((element)=>  element.length !== 0).length} words, {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length} Minutes Read</p>
+        <p>{0.008 * text.split(" ").filter((element) => element.length !== 0).length} Minutes Read</p>
         <h5>Preview</h5>
         <p>
           {text.length > 0
             ? text
-            : "Enter something in the Textbox above to preview"}
+            : "Nothing to Preview"}
         </p>
       </div>
     </>
